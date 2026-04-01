@@ -4,11 +4,11 @@ from base.models import BaseProperty, BaseModel
 
 class FlatType(models.TextChoices):
     NEW = 'yangi', 'Yangi bino'
-    USED = "ikkinchi qo'l", "Ikkinchi qo'l"
+    USED = "ikkinchi_qo'l", "Ikkinchi qo'l"
 
 class RepairType(models.TextChoices):
     KERAK = 'kerak', 'Kerak'
-    KERAK_EMAS = 'kerak emas', 'Kerak emas'
+    KERAK_EMAS = 'kerak_emas', 'Kerak emas'
     KOSMETIK = 'kosmetik', 'Kosmetik'
     YEVROREMONT = 'yevroremont', 'Yevroremont'
     DIZAYNERLIK = 'dizaynerlik', 'Dizaynerlik'
