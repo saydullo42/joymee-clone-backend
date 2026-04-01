@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+
+# Media (user upload qilgan fayllar)
+media/
+
+# Static (collectstatic)
+staticfiles/
+
+# Environment variables (maxfiy)
+.env
+.env.*
+
+# IDE (PyCharm, VS Code)
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing / cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.swp
+*.swo
+*~
