@@ -65,7 +65,7 @@ class HouseImage(BaseModel):
         on_delete=models.CASCADE,
         related_name='images'
     )
-    image = models.ImageField(upload_to='images/house/gallery')
+    image = models.ImageField(upload_to='images/house/gallery/')
 
     class Meta:
         db_table = 'house_images'
@@ -87,7 +87,7 @@ class DailyRentHouseImage(BaseModel):
         on_delete=models.CASCADE,
         related_name='daily_rent_houses'
     )
-    image = models.ImageField(upload_to='images/daily_rent_house/gallery')
+    image = models.ImageField(upload_to='images/daily_rent_house/gallery/')
 
 class Building(BaseProperty):
     building_floor_count = models.PositiveIntegerField()
@@ -102,7 +102,7 @@ class BuildingImage(BaseModel):
         on_delete=models.CASCADE,
         related_name='images'
     )
-    image = models.ImageField(upload_to='images/building/gallery')
+    image = models.ImageField(upload_to='images/building/gallery/')
 
     class Meta:
         db_table = 'building_images'
@@ -122,7 +122,7 @@ class LandImage(BaseModel):
         on_delete=models.CASCADE,
         related_name='images'
     )
-    image = models.ImageField(upload_to='images/land/gallery')
+    image = models.ImageField(upload_to='images/land/gallery/')
 
     class Meta:
         db_table = 'land_images'
@@ -130,4 +130,39 @@ class LandImage(BaseModel):
 
     def __str__(self):
         return f"{self.land.title} image"
+
+
+class HotelType(models.TextChoices):
+    EKONOM = 'ekonom', 'Ekonom'
+    STANDART = 'standart', 'Standart'
+    YARIM_LYUKS = 'yarim_lyuks', 'Yarim lyuks'
+    LYUKS = 'lyuks', 'Lyuks'
+
+class RoomType(models.TextChoices):
+    BIR = "1_o'rinli", "1 o'rinli"
+    IKKI = "2_o'rinli", "2 o'rinli"
+    UCH = "3_o'rinli", "3 o'rinli"
+    MORE = "ko'proq", "Ko'proq"
+
+
+class Hotel(BaseProperty):
+    hotel_type = models.CharField(
+        max_length=20,
+        choices=HotelType.choices,
+        default=HotelType.EKONOM
+    )
+    room_type = models.CharField(
+        max_length=10,
+        choices=RoomType.choices
+    )
+    breakfast = models.BooleanField(default=False)
+
+class HotelImage(BaseModel):
+    hotel = models.ForeignKey(
+        Hotel,
+        on_delete=models.CASCADE,
+        related_name='hotel_images'
+    )
+    image = models.ImageField(upload_to='images/hotel/gallery/')
+
 
