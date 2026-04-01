@@ -74,6 +74,21 @@ class HouseImage(BaseModel):
     def __str__(self):
         return f"{self.house.title} image"
 
+class DailyRentHouse(BaseProperty):
+    guest_count = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = 'daily_rent_houses'
+        ordering = ['-created_at']
+
+class DailyRentHouseImage(BaseModel):
+    daily_rent_house = models.ForeignKey(
+        DailyRentHouse,
+        on_delete=models.CASCADE,
+        related_name='daily_rent_houses'
+    )
+    image = models.ImageField(upload_to='images/daily_rent_house/gallery')
+
 class Building(BaseProperty):
     building_floor_count = models.PositiveIntegerField()
 
