@@ -1,5 +1,5 @@
 from django.db import models
-from base.models import BaseProperty, BaseModel
+from base.models import BaseProperty, BaseModel, BaseRequest
 
 
 class FlatType(models.TextChoices):
@@ -24,9 +24,9 @@ class Flat(BaseProperty):
         max_length=30,
         choices=RepairType.choices
     )
-    room_count = models.PositiveIntegerField()
-    floor_count = models.PositiveIntegerField()
-    flat_floor_count = models.PositiveIntegerField()
+    room_count = models.PositiveSmallIntegerField()
+    floor_count = models.PositiveSmallIntegerField()
+    flat_floor_count = models.PositiveSmallIntegerField()
 
     class Meta:
         db_table = 'flats'
@@ -53,7 +53,7 @@ class House(BaseProperty):
         max_length=30,
         choices=RepairType.choices
     )
-    house_floor_count = models.PositiveIntegerField()
+    house_floor_count = models.PositiveSmallIntegerField()
 
     class Meta:
         db_table = 'houses'
@@ -75,7 +75,7 @@ class HouseImage(BaseModel):
         return f"{self.house.title} image"
 
 class DailyRentHouse(BaseProperty):
-    guest_count = models.PositiveIntegerField()
+    guest_count = models.PositiveSmallIntegerField()
 
     class Meta:
         db_table = 'daily_rent_houses'
@@ -90,7 +90,7 @@ class DailyRentHouseImage(BaseModel):
     image = models.ImageField(upload_to='images/daily_rent_house/gallery/')
 
 class Building(BaseProperty):
-    building_floor_count = models.PositiveIntegerField()
+    building_floor_count = models.PositiveSmallIntegerField()
 
     class Meta:
         db_table = 'buildings'
@@ -165,4 +165,24 @@ class HotelImage(BaseModel):
     )
     image = models.ImageField(upload_to='images/hotel/gallery/')
 
+
+class FlatRequest(BaseRequest):
+    class Meta:
+        db_table = 'flat_request'
+        ordering = ['-created_at']
+
+class HouseRequest(BaseRequest):
+    class Meta:
+        db_table = 'house_request'
+        ordering = ['-created_at']
+
+class BuildingRequest(BaseRequest):
+    class Meta:
+        db_table = 'building_request'
+        ordering = ['-created_at']
+
+class LandRequest(BaseRequest):
+    class Meta:
+        db_table = 'land_request'
+        ordering = ['-created_at']
 

@@ -104,8 +104,24 @@ class BaseProperty(BaseModel):
         abstract = True
 
 
+class BaseRequest(BaseModel):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    body = models.TextField()
+    audio = models.FileField(upload_to='audio/property/')
+    price_from = models.DecimalField(max_digits=14, decimal_places=2)
+    price_to = models.DecimalField(max_digits=14, decimal_places=2)
+    currency = models.CharField(
+        max_length=5,
+        choices=CurrencyType.choices,
+        default=CurrencyType.UZS
+    )
+    district = models.ForeignKey(
+        District,
+        on_delete=models.PROTECT,
+        related_name='rent_buy'
+    )
+    phone_number = models.CharField(max_length=20)
 
-
-
-
-
+    class Meta:
+        abstract = True
